@@ -1,17 +1,34 @@
+<script setup lang="ts">
+import { computed } from "vue"
+
+const props = defineProps<{ base: string }>()
+
+const baseClass = computed(() => {
+  switch (props.base) {
+    case "coffee":
+      return "coffee"
+    case "green-tea":
+      return "green-tea"
+    case "black-tea":
+      return "black-tea"
+    default:
+      return ""
+  }
+})
+</script>
+
 <template>
-  <div class="baseBeverage"></div>
+  <div class="base" :class="baseClass"></div>
 </template>
 
-<script setup lang="ts"></script>
-
 <style scoped>
-.baseBeverage {
-  position: relative;
+.base {
   width: 100%;
   height: 100%;
-  bottom: 0;
-  animation: pour-tea 2s;
-  z-index: 300;
-  /* // border-radius: 0.05em 0.05em 2.2em 2.2em; */
+  border-radius: 6px;
+  margin-top: -10%;
 }
+.coffee { background: #5a381e; }
+.green-tea { background: #cfe2a9; }
+.black-tea { background: #9b5c15; }
 </style>
