@@ -1,9 +1,29 @@
 <template>
-  <div class="syrup"></div>
+  <div class="syrup" :class="syrupClass"></div>
 </template>
 
-<script setup lang="ts"></script>
-<style lang="scss" scoped>
+<script setup lang="ts">
+import { computed } from "vue"
+
+const props = defineProps<{ syrup: string }>()
+
+const syrupClass = computed(() => {
+  switch (props.syrup) {
+    case "vanilla":
+      return "vanilla"
+    case "caramel":
+      return "caramel"
+    case "hazelnut":
+      return "hazelnut"
+    case "none":
+      return "none"
+    default:
+      return ""
+  }
+})
+</script>
+
+<style scoped lang="scss">
 .syrup {
   transform: translateY(400%);
   position: relative;
@@ -11,12 +31,12 @@
   height: 20%;
   animation: pour-tea 2s 1s forwards;
   z-index: 2;
-  background: repeating-linear-gradient(
-    45deg,
-    var(--texture-color),
-    var(--texture-color) 10px,
-    rgba(225, 207, 149, 1) 10px,
-    rgba(225, 207, 149, 1) 20px
-  );
+  background-color: #c6c6c6;
 }
+
+.vanilla { background-color: #f3e5ab; }
+.caramel { background-color: #c68c53; }
+.hazelnut { background-color: #b88961; }
+.none { background-color: transparent; }
 </style>
+
